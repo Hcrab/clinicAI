@@ -33,7 +33,8 @@ export default function ReportPage() {
   const handleTranslate = async () => {
     if (!reportData) return;
     try {
-      const resp = await fetch("http://34.30.161.204:5000/api/translate_report", {
+      const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "";
+      const resp = await fetch(`${backend}/api/translate_report`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
