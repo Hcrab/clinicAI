@@ -1,0 +1,194 @@
+/* Chatbot.module.css */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  background-color: #f0fafb;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+.langSwitch {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.langSwitch button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #4fd1c5, #38b2ac);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.langSwitch button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.chatWindow {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+  min-height: 400px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.bubble {
+  margin: 0.8rem 0;
+  padding: 1rem 1.2rem;
+  border-radius: 15px;
+  line-height: 1.5;
+  max-width: 80%;
+  word-break: break-word;
+  color: #2d3748;
+}
+
+.userBubble {
+  background: #e3f8ff;
+  margin-left: auto;
+  border-bottom-right-radius: 5px;
+}
+
+.botBubble {
+  background: #e0f7f0;
+  margin-right: auto;
+  border-bottom-left-radius: 5px;
+}
+
+.debugBox {
+  background: #fff9db;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ffeeba;
+}
+
+.quickRow {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.quickBtn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(145deg, #4fd1c5, #38b2ac);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quickBtn:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.inputRow {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.inputRow input {
+  flex: 1;
+  padding: 0.8rem;
+  border: 2px solid #c3fae8;
+  border-radius: 25px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.inputRow input:focus {
+  outline: none;
+  border-color: #4fd1c5;
+  box-shadow: 0 0 0 3px rgba(79, 209, 197, 0.1);
+}
+
+.inputRow button {
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(145deg, #4fd1c5, #38b2ac);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.inputRow button:disabled {
+  background: #cbd5e0;
+  cursor: not-allowed;
+}
+
+.actionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
+.helperBtn {
+  padding: 0.6rem 1rem;
+  border: 2px solid #4fd1c5;
+  border-radius: 20px;
+  background: white;
+  color: #2d3748;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.helperBtn:hover {
+  background: #4fd1c5;
+  color: white;
+}
+
+.modalMask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalCard {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  max-width: 500px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.modalBtns {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.modalBtns button {
+  flex: 1;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(145deg, #4fd1c5, #38b2ac);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modalBtns button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}

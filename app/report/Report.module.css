@@ -1,0 +1,82 @@
+
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  margin: 0 5px;
+  padding: 10px 20px;
+  border: none;
+  background: var(--primary-light);
+  color: var(--primary-color);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.tabs button:hover {
+  background: var(--primary-hover);
+}
+
+.activeTab {
+  background: var(--primary-color);
+  color: white;
+}
+
+.content {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  min-height: 200px;
+}
+
+.reportSection {
+  padding: 10px;
+}
+
+.downloadSection {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.downloadBtn {
+  padding: 10px 20px;
+  background: rgb(194, 255, 165);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.downloadBtn:hover {
+  background: #2ecc71; /* Darker green on hover */
+}
+
+.mapButton {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: rgb(248, 148, 255);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.mapButton:hover {
+  background: #8e44ad; /* Darker purple on hover */
+}

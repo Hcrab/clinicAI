@@ -1,0 +1,201 @@
+/* —— 全局 & 重置 —— */
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: var(--teal-dark);
+}
+
+/* 顶栏 */
+.topbar {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 120;
+}
+.open {
+  border-bottom: 1px solid #eee;
+}
+
+.back,
+.toggleFilter,
+.viewSwitch button,
+.langBtn {
+  border: none;
+  padding: 0.4rem 1rem;
+  background: linear-gradient(145deg, var(--teal-light), var(--teal-dark));
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.back:hover,
+.toggleFilter:hover,
+.viewSwitch button:hover,
+.langBtn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.viewSwitch {
+  margin-left: auto;
+  display: flex;
+  gap: 0.4rem;
+}
+.active {
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+/* 筛选面板 */
+.filterPanel {
+  background: #fff;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+.filterPanel h4 {
+  margin: 0.4rem 0;
+}
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.helperBtn {
+  padding: 0.6rem 1rem;
+  border: 2px solid var(--teal-light);
+  border-radius: 20px;
+  background: white;
+  color: var(--gray-dark);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.helperBtn:hover {
+  background: var(--teal-light);
+  color: #fff;
+}
+
+/* 地图/列表区 */
+.containerMap {
+  display: flex;
+  height: calc(100vh - 56px);
+}
+.mapPane {
+  height: calc(100vh - 56px);
+}
+.listPane {
+  padding: 1rem;
+}
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: translateY(-2px);
+}
+.noResult {
+  text-align: center;
+  color: #888;
+}
+
+/* 选择 Modal（Tag & Language） */
+.selectorModalMask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modalCard {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 15px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* 搜索 / 选项列表 */
+.modalSearch {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #c3fae8;
+  border-radius: 8px;
+}
+.modalOptions {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+.label {
+  display: block;
+  margin: 4px 0;
+}
+
+/* Modal 按钮 */
+.modalBtns {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+.modalBtns button {
+  flex: 1;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(145deg, var(--teal-light), var(--teal-dark));
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.modalBtns button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* 诊所详情 Modal（最高层级） */
+.clinicModalMask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--teal-dark);
+  cursor: pointer;
+}
+
+/* 移动端 */
+@media (max-width: 600px) {
+  .containerMap {
+    flex-direction: column;
+  }
+  .mapPane {
+    height: 60vh;
+  }
+}
