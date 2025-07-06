@@ -20,7 +20,7 @@ CORS(app)
 # ------------------------------------------------------------------
 # 基本配置
 # ------------------------------------------------------------------
-openai.api_key = os.getenv("DEEPSEEK_API_KEY", "sk-69c185ea15ed4ed2bce8c097d03c9366")
+openai.api_key = os.getenv("DEEPSEEK_API_KEY", "")
 openai.api_base = "https://api.deepseek.com"
 
 CONFIDENCE_THRESHOLD = 75

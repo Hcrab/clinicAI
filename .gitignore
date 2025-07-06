@@ -23,6 +23,9 @@
 # misc
 .DS_Store
 *.pem
+*.log
+nohup.out
+app/api/api_key
 
 # debug
 npm-debug.log*

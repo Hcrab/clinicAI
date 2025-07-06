@@ -171,7 +171,8 @@ export default function Chatbot() {
   ): Promise<BackendResponse | null> => {
     setIsLoading(true);
     try {
-      const resp = await fetch("http://34.171.117.210:5000/api/conversation", {
+      const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "";
+      const resp = await fetch(`${backend}/api/conversation`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ history, approval, lang, debug: debugMode }),
