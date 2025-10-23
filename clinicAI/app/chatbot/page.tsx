@@ -29,6 +29,7 @@ const UI_TEXT = {
     approvalNo: "重新生成",
     speechNotSupported: "不支持语音识别",
     conf: "置信度：",
+    generatingReport: "正在生成报告…",
   },
   zh_TW: {
     selectLang: "介面語言：",
@@ -48,6 +49,7 @@ const UI_TEXT = {
     approvalNo: "重新生成",
     speechNotSupported: "不支援語音識別",
     conf: "置信度：",
+    generatingReport: "正在生成報告…",
   },
   en: {
     selectLang: "Language:",
@@ -67,6 +69,7 @@ const UI_TEXT = {
     approvalNo: "Ask Again",
     speechNotSupported: "Speech not supported",
     conf: "Confidence: ",
+    generatingReport: "Generating report…",
   },
   id: {
     selectLang: "Bahasa antarmuka:",
@@ -86,6 +89,7 @@ const UI_TEXT = {
     approvalNo: "Minta Lagi",
     speechNotSupported: "Pengenalan suara tidak didukung",
     conf: "Keyakinan: ",
+    generatingReport: "Sedang membuat laporan…",
   },
 } as const;
 type Locale = keyof typeof UI_TEXT;
@@ -123,6 +127,7 @@ export default function Chatbot() {
   const [approvalModalOpen, setApprovalModalOpen] = useState(false);
   const [pendingPlainSummary, setPendingPlainSummary] = useState("");
   const [showOtherResponse, setShowOtherResponse] = useState(false);
+  const [isGeneratingReport, setIsGeneratingReport] = useState(false);
   const text = UI_TEXT[lang];
 
   /*──────────────  Restore / persist chat  ─────────────*/
@@ -165,20 +170,38 @@ export default function Chatbot() {
     }, 35);
   };
 
+  // Resolve backend base at runtime; avoid baking localhost for browsers on remote devices
+  const backendBase = (() => {
+    const envBase = process.env.NEXT_PUBLIC_BACKEND_URL || "";
+    const isLocal = /^(https?:\/\/)?(localhost|127\.0\.0\.1)(:|$)/i.test(envBase);
+    const winBase =
+      typeof window !== "undefined"
+        ? `${window.location.protocol}//${window.location.hostname}:5000`
+        : "";
+    return !envBase || isLocal ? winBase : envBase;
+  })();
+
   const sendToBackend = async (
     history: Message[],
     approval: boolean | null = null
   ): Promise<BackendResponse | null> => {
     setIsLoading(true);
     try {
-      const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "";
-      const resp = await fetch(`${backend}/api/conversation`, {
+      const resp = await fetch(`${backendBase}/api/conversation`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ history, approval, lang, debug: debugMode }),
       });
-      if (!resp.ok) throw new Error("Network response was not ok");
-      return (await resp.json()) as BackendResponse;
+      const text = await resp.text();
+      if (!resp.ok) {
+        try {
+          const data = JSON.parse(text);
+          throw new Error(data.error || text || resp.statusText);
+        } catch {
+          throw new Error(text || resp.statusText || "Request failed");
+        }
+      }
+      return JSON.parse(text) as BackendResponse;
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Unknown error";
       setMessages((prev) => [
@@ -255,6 +278,9 @@ export default function Chatbot() {
     };
     const history = [...messages, assistantMsg];
 
+    if (approved) {
+      setIsGeneratingReport(true);
+    }
     const data = await sendToBackend(history, approved);
     if (!data) return;
 
@@ -266,7 +292,7 @@ export default function Chatbot() {
       };
       sessionStorage.setItem("finalReport", JSON.stringify(finalReport));
       router.push("/report");
-    } else if (data.next_question) {
+    } else if (!approved && data.next_question) {
       typeText(data.next_question, data.hidden_analysis);
     }
     setPendingPlainSummary("");
@@ -284,7 +310,8 @@ export default function Chatbot() {
 
   /*──────────────────────────  Render  ──────────────────────────*/
   return (
-    <div className={styles.container}>
+    <div className={styles.page}>
+      <div className={styles.container}>
       {/* Language switch */}
       <div className={styles.langSwitch}>
         <label>
@@ -316,6 +343,11 @@ export default function Chatbot() {
             )}
           </div>
         ))}
+        {isGeneratingReport && (
+          <div className={`${styles.bubble} ${styles.botBubble}`}>
+            {text.generatingReport}
+          </div>
+        )}
         {isLoading && (
           <div className={`${styles.bubble} ${styles.botBubble}`}>
             {text.thinking}
@@ -335,23 +367,25 @@ export default function Chatbot() {
       )}
 
       {/* Quick replies */}
-      <div className={styles.quickRow}>
-        <button onClick={() => quickReply(text.yes)} className={styles.quickBtn}>
-          {text.yes}
-        </button>
-        <button onClick={() => quickReply(text.no)} className={styles.quickBtn}>
-          {text.no}
-        </button>
-        <button
-          onClick={() => setShowOtherResponse(true)}
-          className={styles.quickBtn}
-        >
-          {text.else}
-        </button>
-      </div>
+      {!isGeneratingReport && (
+        <div className={styles.quickRow}>
+          <button onClick={() => quickReply(text.yes)} className={styles.quickBtn}>
+            {text.yes}
+          </button>
+          <button onClick={() => quickReply(text.no)} className={styles.quickBtn}>
+            {text.no}
+          </button>
+          <button
+            onClick={() => setShowOtherResponse(true)}
+            className={styles.quickBtn}
+          >
+            {text.else}
+          </button>
+        </div>
+      )}
 
       {/* User input */}
-      {showOtherResponse && (
+      {showOtherResponse && !isGeneratingReport && (
         <form onSubmit={(e) => handleSubmit(e)} className={styles.inputRow}>
           <input
             value={userInput}
@@ -369,10 +403,10 @@ export default function Chatbot() {
         <button onClick={() => router.push("/")} className={styles.helperBtn}>
           {text.home}
         </button>
-        <button onClick={clearChat} className={styles.helperBtn}>
+        <button onClick={clearChat} className={styles.helperBtn} disabled={isGeneratingReport}>
           {text.clearChat}
         </button>
-        <button onClick={regenerateResponse} className={styles.helperBtn}>
+        <button onClick={regenerateResponse} className={styles.helperBtn} disabled={isGeneratingReport}>
           {text.regenerate}
         </button>
         <button onClick={() => router.push("/map")} className={styles.helperBtn}>
@@ -403,6 +437,7 @@ export default function Chatbot() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }

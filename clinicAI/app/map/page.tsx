@@ -28,6 +28,30 @@ import styles from "./Map.module.css";
 /* 部门四语翻译字典 */
 import specI18n from "./department_i18n.json";
 
+/* 语言名称缺失时的兜底翻译（两文三语+印尼语） */
+const LANG_FALLBACK: Record<string, { zh_CN: string; zh_TW: string; en: string; id: string }> = {
+  // Hindi
+  "印地話": { zh_CN: "印地语", zh_TW: "印地語", en: "Hindi", id: "Bahasa Hindi" },
+  "印地话": { zh_CN: "印地语", zh_TW: "印地語", en: "Hindi", id: "Bahasa Hindi" },
+  // Toishanese
+  "台山話": { zh_CN: "台山话", zh_TW: "台山話", en: "Toishanese", id: "Bahasa Taishan" },
+  // Basic Japanese
+  "基本日語": { zh_CN: "基本日语", zh_TW: "基本日語", en: "Basic Japanese", id: "Bahasa Jepang Dasar" },
+  "基本日语": { zh_CN: "基本日语", zh_TW: "基本日語", en: "Basic Japanese", id: "Bahasa Jepang Dasar" },
+  // Bengali
+  "孟加拉話": { zh_CN: "孟加拉语", zh_TW: "孟加拉語", en: "Bengali", id: "Bahasa Bengali" },
+  "孟加拉话": { zh_CN: "孟加拉语", zh_TW: "孟加拉語", en: "Bengali", id: "Bahasa Bengali" },
+  // Burmese
+  "緬甸語": { zh_CN: "缅甸语", zh_TW: "緬甸語", en: "Burmese", id: "Bahasa Burma" },
+  "缅甸语": { zh_CN: "缅甸语", zh_TW: "緬甸語", en: "Burmese", id: "Bahasa Burma" },
+  // Korean
+  "韓語": { zh_CN: "韩语", zh_TW: "韓語", en: "Korean", id: "Bahasa Korea" },
+  "韩语": { zh_CN: "韩语", zh_TW: "韓語", en: "Korean", id: "Bahasa Korea" },
+  // Malay (Malaysia)
+  "馬來西亞語": { zh_CN: "马来西亚语", zh_TW: "馬來西亞語", en: "Malay (Malaysia)", id: "Bahasa Malaysia" },
+  "马来西亚语": { zh_CN: "马来西亚语", zh_TW: "馬來西亞語", en: "Malay (Malaysia)", id: "Bahasa Malaysia" },
+};
+
 /* Leaflet 类型 */
 import type { LeafletEvent } from "leaflet";
 
@@ -258,11 +282,20 @@ function MapInner() {
             ) {
               d._langMap = {};
               d.languages.forEach((orig, i) => {
-                const mapping =
-                  d.languages_i18n?.[i];
-                if (mapping) {
+                const mapping = { ...(d.languages_i18n?.[i] || {}) } as Record<string, string>;
+                // 应用兜底翻译：仅在目标语言缺失或与中文相同/与原文相同的情况下填充
+                const fb = LANG_FALLBACK[orig] || (mapping.zh_CN && LANG_FALLBACK[mapping.zh_CN]) || (mapping.zh_TW && LANG_FALLBACK[mapping.zh_TW]);
+                if (fb) {
+                  for (const k of ["zh_CN", "zh_TW", "en", "id"] as const) {
+                    const v = mapping[k as keyof typeof mapping] as string | undefined;
+                    if (!v || v === orig || v === mapping.zh_CN) {
+                      (mapping as any)[k] = fb[k];
+                    }
+                  }
+                }
+                if (Object.keys(mapping).length) {
                   d._langMap![orig] = mapping;
-                  langDict[orig] = mapping;
+                  langDict[orig] = mapping as Record<string, string>;
                 }
               });
             }
@@ -518,8 +551,7 @@ function MapInner() {
                 key={l}
                 className={styles.tag}
               >
-                {globalLangMap[l]?.[lang] ||
-                  l}
+                {globalLangMap[l]?.[lang] || LANG_FALLBACK[l]?.[lang] || l}
               </span>
             ))}
           </div>
@@ -731,16 +763,9 @@ function MapInner() {
                               )
                             }
                           />{" "}
-                          {tagModalType ===
-                          "spec"
-                            ? globalSpecMap[
-                                s
-                              ]?.[lang] ||
-                              s
-                            : globalLangMap[
-                                s
-                              ]?.[lang] ||
-                              s}
+                  {tagModalType === "spec"
+                    ? globalSpecMap[s]?.[lang] || s
+                    : globalLangMap[s]?.[lang] || LANG_FALLBACK[s]?.[lang] || s}
                         </label>
                       );
                     })}
@@ -896,12 +921,10 @@ function MapInner() {
                       d.specialty}{" "}
                     –{" "}
                     {d.languages
-                      .map(
-                        o =>
-                          globalLangMap[
-                            o
-                          ]?.[lang] ||
-                          o
+                      .map(o =>
+                        globalLangMap[o]?.[lang] ||
+                        LANG_FALLBACK[o]?.[lang] ||
+                        o
                       )
                       .join(", ")}
                   </li>

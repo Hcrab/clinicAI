@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="container">
+    <div className="home-container">
       <div className="header">
         <h1>Welcome to ClinicAI!</h1>
         <p className="subheading">Your one‑stop healthcare assistant.</p>
@@ -27,7 +27,7 @@ export default function Home() {
         <div className="feature-card">
           <h2 className="feature-title">World Map</h2>
           <p className="feature-description">
-          he map and discover nearby medical facilities.
+          Use the map and discover nearby medical facilities.
           </p>
           <Link href="/map" className="button">
             Go to Map
@@ -37,12 +37,13 @@ export default function Home() {
 
       {/* Inline styles kept for simplicity; feel free to move into CSS Module. */}
       <style jsx>{`
-        .container {
+        .home-container {
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          min-height: 100vh;
+          min-height: 100dvh;
+          width: 100%;
           padding: 20px;
           background: #f0f8ff;
           font-family: Arial, sans-serif;

@@ -532,6 +532,12 @@
       "zh_TW": "口腔顎面外科",
       "en": "Oral & Maxillofacial Surgery",
       "id": "Bedah Mulut & Maksilofasial"
+    },
+    "血管外科": {
+      "zh_CN": "血管外科",
+      "zh_TW": "血管外科",
+      "en": "Vascular Surgery",
+      "id": "Bedah Vaskular"
     }
   }
   

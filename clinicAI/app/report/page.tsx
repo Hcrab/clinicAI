@@ -33,8 +33,16 @@ export default function ReportPage() {
   const handleTranslate = async () => {
     if (!reportData) return;
     try {
-      const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "";
-      const resp = await fetch(`${backend}/api/translate_report`, {
+      const backendBase = (() => {
+        const envBase = process.env.NEXT_PUBLIC_BACKEND_URL || "";
+        const isLocal = /^(https?:\/\/)?(localhost|127\.0\.0\.1)(:|$)/i.test(envBase);
+        const winBase =
+          typeof window !== "undefined"
+            ? `${window.location.protocol}//${window.location.hostname}:5000`
+            : "";
+        return !envBase || isLocal ? winBase : envBase;
+      })();
+      const resp = await fetch(`${backendBase}/api/translate_report`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -86,8 +94,8 @@ export default function ReportPage() {
   /* ----------------  Loading 占位 ---------------- */
   if (!reportData) return <div>Loading report…</div>;
 
-  /* ----------------  决定使用哪个语言字段——Malay(ms) 对应 JSON 里的 id ---------------- */
-  const deptLangKey = targetLang === "ms" ? "id" : (targetLang as keyof typeof specI18n[string]);
+  /* ----------------  决定使用哪个语言字段（兼容历史 ms → id） ---------------- */
+  const deptLangKey = (targetLang === "ms" ? "id" : targetLang) as keyof typeof specI18n[string];
 
   /* ----------------  UI ---------------- */
   return (
@@ -100,7 +108,7 @@ export default function ReportPage() {
           <option value="en">English</option>
           <option value="zh_CN">简体中文</option>
           <option value="zh_TW">繁体中文</option>
-          <option value="ms">Bahasa Melayu</option>
+          <option value="id">Bahasa Indonesia</option>
         </select>
         <button onClick={handleTranslate} className={styles.downloadBtn}>
           {lang.translateButton}

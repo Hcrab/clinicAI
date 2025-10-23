@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "leaflet/dist/leaflet.css";
+/* Leaflet CSS is imported in map/page.tsx via JS import to avoid PostCSS @import requirements. */
 
 :root {
   --teal-light: #4fd1c5;
@@ -100,4 +100,3 @@ body {
     width: 100%;
   }
 }
-
