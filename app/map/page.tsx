@@ -15,13 +15,7 @@ const MarkerClusterGroup = dynamic(
 
 import NextDynamic from "next/dynamic";
   
-import {
-  Suspense,
-  useEffect,
-  useState,
-  useMemo,
-  Fragment,
-} from "react";
+import { Suspense, useEffect, useState, useMemo, Fragment } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./Map.module.css";
 
@@ -241,6 +235,14 @@ function MapInner() {
       font: "Ukuran:",
     },
   }[lang];
+
+  /* ─────────── 初始化界面语言 ─────────── */
+  useEffect(() => {
+    const q = searchParams.get("lang");
+    const saved = (typeof window !== "undefined" && sessionStorage.getItem("uiLang")) as Locale | null;
+    const target = (q as Locale) || saved;
+    if (target && (LOCALES as readonly string[]).includes(target)) setLang(target);
+  }, [searchParams]);
 
   /* ─────────── 数据加载 ─────────── */
   useEffect(() => {
@@ -816,14 +818,10 @@ function MapInner() {
                         );
                       }}
                     >
-                      {
-                        LOCALE_LABELS[
-                          l
-                        ]
-                      }
-                    </div>
-                  ))}
-                </div>
+                      {LOCALE_LABELS[l]}
+                   </div>
+                 ))}
+               </div>
                 <div
                   className={
                     styles.modalBtns

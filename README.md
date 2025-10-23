@@ -14,12 +14,12 @@ Languages: [English](README.md) | [简体中文](README.zh-CN.md) | [繁體中�
 
 ### Home ("/")
 Purpose: entry hub to jump to the Chatbot and Map modules.
-![Home](image-1.png)
+![Home](image-11.png)
 
 ### Chatbot & Report ("/chatbot", "/report")
 - Purpose: collect user symptoms through dialogue; after user approval, generate two summaries — a plain-language summary for users and a professional summary for clinicians — and recommend relevant specialties.
 - Flow:
-  1) The user provides information via quick buttons (YES/NO/ELSE) or free text.
+  1) The user provides information via quick buttons (YES/NO) or free text.
      ![Chat Flow](image-2.png)
   2) When the backend AI considers the information sufficient, it asks the user to confirm whether the summary matches their situation; if approved, it proceeds to generate the report.
      ![Approval Prompt](image-5.png)

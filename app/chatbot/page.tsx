@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import styles from "./Chatbot.module.css";
 
@@ -118,6 +119,7 @@ export default function Chatbot() {
 
   /*──────────────  State  ─────────────*/
   const [lang, setLang] = useState<Locale>("zh_CN");
+  const searchParams = useSearchParams();
   const [userInput, setUserInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -129,6 +131,14 @@ export default function Chatbot() {
   const [showOtherResponse, setShowOtherResponse] = useState(false);
   const [isGeneratingReport, setIsGeneratingReport] = useState(false);
   const text = UI_TEXT[lang];
+
+  /*──────────────  Init language from URL or session  ─────────────*/
+  useEffect(() => {
+    const q = searchParams.get("lang");
+    const saved = (typeof window !== "undefined" && sessionStorage.getItem("uiLang")) as Locale | null;
+    const target = (q as Locale) || saved;
+    if (target && ["zh_CN", "zh_TW", "en", "id"].includes(target)) setLang(target);
+  }, [searchParams]);
 
   /*──────────────  Restore / persist chat  ─────────────*/
   useEffect(() => {
@@ -318,7 +328,11 @@ export default function Chatbot() {
           {text.selectLang}
           <select
             value={lang}
-            onChange={(e) => setLang(e.target.value as Locale)}
+            onChange={(e) => {
+              const v = e.target.value as Locale;
+              setLang(v);
+              try { sessionStorage.setItem("uiLang", v); } catch {}
+            }}
           >
             <option value="zh_CN">简体中文</option>
             <option value="zh_TW">繁體中文</option>
