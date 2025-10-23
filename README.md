@@ -14,19 +14,19 @@ Languages: [English](README.md) | [简体中文](README.zh-CN.md) | [繁體中�
 
 ### Home ("/")
 Purpose: entry hub to jump to the Chatbot and Map modules.
-![Home](image-11.png)
+![Home](docs/images/image-11.png)
 
 ### Chatbot & Report ("/chatbot", "/report")
 - Purpose: collect user symptoms through dialogue; after user approval, generate two summaries — a plain-language summary for users and a professional summary for clinicians — and recommend relevant specialties.
 - Flow:
   1) The user provides information via quick buttons (YES/NO) or free text.
-     ![Chat Flow](image-2.png)
+     ![Chat Flow](docs/images/image-2.png)
   2) When the backend AI considers the information sufficient, it asks the user to confirm whether the summary matches their situation; if approved, it proceeds to generate the report.
-     ![Approval Prompt](image-5.png)
+     ![Approval Prompt](docs/images/image-5.png)
   3) After approval, the final report is generated and the app navigates to the Report page, which shows the plain and professional summaries and recommended specialties.
-     ![Report Page](image-7.png)
-     ![Professional Summary](image-8.png)
-     ![Recommended Specialties](image-9.png)
+     ![Report Page](docs/images/image-7.png)
+     ![Professional Summary](docs/images/image-8.png)
+     ![Recommended Specialties](docs/images/image-9.png)
 
 ### Map ("/map")
 - Purpose: visualize clinics; filter by specialty, language, and distance; switch between map and list views.
@@ -37,7 +37,7 @@ Purpose: entry hub to jump to the Chatbot and Map modules.
 - Rendering:
   - Leaflet + OSM tiles + clustering; auto fits bounds for filtered results.
 - Screenshot:
-  ![Map](image-10.png)
+  ![Map](docs/images/image-10.png)
 
 ## Local Development
 
