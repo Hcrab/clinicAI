@@ -1,8 +1,11 @@
 # ClinicAI
 
 ClinicAI is a web-based assistant, originally prototyped with my team for an HKAGE course project.
+
 It aims to reduce language and knowledge barriers in healthcare: newcomers from mainland China may worry about doctors’ Mandarin proficiency, Indonesian-speaking communities in Hong Kong struggle to find native-language clinics, and non-professionals often find it hard to describe symptoms effectively.
+
 This prototype enables AI-assisted triage through conversation, estimates the likely specialty, generates multilingual summaries to improve doctor–patient communication, and helps users find nearby clinics on an interactive map.
+
 The project includes a Next.js frontend and a minimal Flask backend API.
 
 Languages: [English](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md)
