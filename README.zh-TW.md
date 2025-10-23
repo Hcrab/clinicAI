@@ -12,7 +12,7 @@ ClinicAI 是一款基於 Web 的智慧助理，最初為 HKAGE 課程專案與�
 
 ### 首頁（"/"）
 用途：作為入口聚合頁，導向 Chatbot 與 Map 兩大模組。
-![ClinicAI 首頁](![alt text](image-11.png))
+![ClinicAI 首頁](image-28.png)
 
 ### Chatbot 問診頁與病情報告頁（"/chatbot", "/report"）
 - 用途：透過對話蒐集使用者症狀；在使用者同意後產生病情摘要，包含提供使用者閱讀的通俗摘要與提供醫師參考的專業摘要，並給出建議科別。
