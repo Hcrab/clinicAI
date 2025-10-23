@@ -1,0 +1,98 @@
+{
+  "上海話": {
+    "zh_CN": "上海话",
+    "zh_TW": "上海話",
+    "en": "Shanghainese",
+    "id": "Bahasa Shanghai"
+  },
+  "印尼語": {
+    "zh_CN": "印尼语",
+    "zh_TW": "印尼語",
+    "en": "Indonesian",
+    "id": "Bahasa Indonesia"
+  },
+  "台灣話": {
+    "zh_CN": "台湾话",
+    "zh_TW": "台灣話",
+    "en": "Taiwanese",
+    "id": "Bahasa Taiwan"
+  },
+  "客家話": {
+    "zh_CN": "客家话",
+    "zh_TW": "客家話",
+    "en": "Hakka",
+    "id": "Bahasa Hakka"
+  },
+  "廣東話": {
+    "zh_CN": "广东话",
+    "zh_TW": "廣東話",
+    "en": "Cantonese",
+    "id": "Bahasa Kanton"
+  },
+  "德語": {
+    "zh_CN": "德语",
+    "zh_TW": "德語",
+    "en": "German",
+    "id": "Bahasa Jerman"
+  },
+  "日語": {
+    "zh_CN": "日语",
+    "zh_TW": "日語",
+    "en": "Japanese",
+    "id": "Bahasa Jepang"
+  },
+  "普通話": {
+    "zh_CN": "普通话",
+    "zh_TW": "普通話",
+    "en": "Mandarin",
+    "id": "Bahasa Mandarin"
+  },
+  "法語": {
+    "zh_CN": "法语",
+    "zh_TW": "法語",
+    "en": "French",
+    "id": "Bahasa Prancis"
+  },
+  "泰語": {
+    "zh_CN": "泰语",
+    "zh_TW": "泰語",
+    "en": "Thai",
+    "id": "Bahasa Thailand"
+  },
+  "潮州話": {
+    "zh_CN": "潮州话",
+    "zh_TW": "潮州話",
+    "en": "Teochew",
+    "id": "Bahasa Teochew"
+  },
+  "福州話": {
+    "zh_CN": "福州话",
+    "zh_TW": "福州話",
+    "en": "Fuzhounese",
+    "id": "Bahasa Fuzhou"
+  },
+  "福建話": {
+    "zh_CN": "福建话",
+    "zh_TW": "福建話",
+    "en": "Hokkien",
+    "id": "Bahasa Hokkien"
+  },
+  "福建話(廈門)": {
+    "zh_CN": "福建话(厦门)",
+    "zh_TW": "福建話(廈門)",
+    "en": "Xiamen Hokkien",
+    "id": "Hokkien Xiamen"
+  },
+  "福建話(閩南)": {
+    "zh_CN": "福建话(闽南)",
+    "zh_TW": "福建話(閩南)",
+    "en": "Minnan Hokkien",
+    "id": "Hokkien Minnan"
+  },
+  "英語": {
+    "zh_CN": "英语",
+    "zh_TW": "英語",
+    "en": "English",
+    "id": "Bahasa Inggris"
+  }
+}

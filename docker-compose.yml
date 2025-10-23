@@ -1,0 +1,11 @@
+version: '3'
+services:
+  clinical:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app  # 掛載本地代碼到容器
+    environment:
+      - NODE_ENV=development
+    command: npm run dev

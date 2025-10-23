@@ -1,0 +1,103 @@
+/* src/app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --teal-light: #4fd1c5;
+  --teal-dark: #38b2ac;
+  --gray-dark: #2d3748;
+  --bg-light: #f0fafb;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Leaflet required styles */
+.leaflet-container {
+  width: 100%;
+  height: 500px;
+}
+
+/* Map page styles */
+.map-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.map-input-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.map-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.map-submit-btn {
+  padding: 8px 16px;
+  background: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.map-error {
+  color: red;
+  margin-bottom: 10px;
+}
+:root {
+  --primary-color: #479eb4;
+  --primary-hover: #3988a0;   /* 深一阶，给 :hover / :active 用 */
+  --primary-light: #e3f1f5;   /* 浅一阶，给背景或 tag 用 */
+}
+
+/* 全局设置 viewport，支持响应式 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+    max-width: 100%;
+  }
+
+  .tabs button {
+    padding: 8px 16px;
+  }
+
+  .downloadBtn, .mapButton {
+    width: 100%;
+  }
+}
+
