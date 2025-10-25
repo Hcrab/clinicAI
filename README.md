@@ -84,7 +84,7 @@ This prototype was primarily led and developed by me (Project Manager & core dev
 I would like to thank my four teammates for their valuable contributions in:
 
 - Pitch writing and research during the HKAGE course project  
-- Testing, Prompt design and refinement for the conversational AI module  
+- Testing, prompt design and refinement for the conversational AI module  
 
 Their collaboration made the project possible.
 
