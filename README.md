@@ -76,7 +76,17 @@ Purpose: entry hub to jump to the Chatbot and Map modules.
 
 ## Challenges
 1. Due to LLM hallucinations and related issues, achieving precise diagnosis is difficult; the prototype’s diagnostic accuracy is limited.
-2. Public datasets of doctor names, specialties, and languages generally prohibit scraping; we currently lack a clearly ethical way to source the required data.
+2. Public datasets of doctor names, specialties, and languages generally prohibit scraping (as indicated in their robots.txt or terms of use); we currently lack a clearly ethical way to source the required data.
+
+## Acknowledgements
+
+This prototype was primarily led and developed by me (Project Manager & core developer).  
+I would like to thank my four teammates for their valuable contributions in:
+
+- Pitch writing and research during the HKAGE course project  
+- Testing, Prompt design and refinement for the conversational AI module  
+
+Their collaboration made the project possible.
 
 ## Notes
 
